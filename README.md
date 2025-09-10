@@ -1,18 +1,30 @@
-# Posha Recipe Customisation MVP
+# Posha Recipe Customization MVP
 
-This is a working prototype for a system that translates a user's natural language recipe customisation requests into structured JSON intents. It was built as part of the Product Manager assessment for Posha.
-
----
-
-## 1. The Problem & The User
-
-* **User Persona:** "The Busy Professional" who uses a Posha cooking robot for convenient, high-quality, home-cooked meals.
-* **The Problem:** Users want to easily tweak standard recipes to fit their unique tastes, dietary needs, or available ingredients, without needing to be an expert chef.
-* **The Goal:** To build a reliable "intent recognition" engine as the foundation for all future recipe customisation, turning a user's free-form request into a command the robot can understand.
+This document outlines the problem, proposed solution, and strategic thinking for a minimal viable capability that allows a Posha user to customize recipes using natural language.
 
 ---
 
-## 2. MVP Scope & Prioritisation
+## 1. The Problem & The User (User Empathy)
+
+* **User Persona:** "The Busy Professional." They invested in a Posha robot to save time and eat healthier, but they still want the flexibility to adapt meals to their family's specific tastes, dietary needs, or what's currently in their fridge.
+
+* **The Core Problem:** Manually editing a recipe's steps and ingredient quantities is a high-friction process. Users need a way to make simple tweaks as effortlessly as talking to a chef.
+
+* **The Goal:** To build a reliable "intent recognition" engine that translates a user's free-form request into a structured command the robot can understand, making the product feel more personal and intelligent.
+
+---
+
+## 2. Alignment with Posha's Business Goals (Business Acumen)
+
+This feature is not just a user convenience; it's a strategic investment in Posha's core business model.
+
+* **Increases User Retention:** By making the robot more personal and adaptable to daily needs, this capability increases the value of the "Posha Circle" subscription, which is key to reducing long-term churn.
+* **Enhances Product Differentiation:** A powerful, intuitive conversational interface for recipes is a key differentiator against competitors like Thermomix and Suvie, reinforcing Posha's brand as the smartest, most user-friendly cooking robot on the market.
+* **Creates a Data Moat:** Analysing user customization intents provides a valuable dataset on real-world user preferences, which can directly inform future recipe development and personalisation features.
+
+---
+
+## 3. MVP Scope & Prioritisation
 
 The goal for this MVP was to deliver a simple, reliable, and valuable core experience. To achieve this, I ruthlessly prioritised the features that would solve the most common and high-value user problems first.
 
@@ -27,7 +39,7 @@ I chose to implement four core intents based on the most frequent and intuitive 
 
 ---
 
-## 3. The JSON Schema Design
+## 4. The JSON Schema Design
 
 The architecture is composed of two core schemas: a `Recipe Schema` to define the recipe itself, and a `Customization Schema` to define the LLM's output. The design is compositional and extensible.
 
@@ -38,11 +50,11 @@ The architecture is composed of two core schemas: a `Recipe Schema` to define th
 
 ---
 
-## 4. How to Run This Demo
+## 5. How to Run This Demo
 
 ---
 
-## 5. Limitations, Edge Cases & Roadmap
+## 6. Limitations, Edge Cases & Roadmap
 
 This MVP is a focused first step. Acknowledging its limitations is key to defining a clear and realistic roadmap for a more robust V2.
 
