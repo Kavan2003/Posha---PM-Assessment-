@@ -29,7 +29,13 @@ I chose to implement four core intents based on the most frequent and intuitive 
 
 ## 3. The JSON Schema Design
 
-The schema is designed to be minimal for the MVP but easily extensible for future intents.
+The architecture is composed of two core schemas: a `Recipe Schema` to define the recipe itself, and a `Customization Schema` to define the LLM's output. The design is compositional and extensible.
+
+* **The Recipe Schema:** Defines a recipe as a sequence of discrete `actions` (e.g., "dispense", "cook") with specific `parameters` for each. This allows for maximum flexibility.
+* **The Customization Schema:** Defines the LLM's response, including a `status` ("success" or "failure" with a reason) and an array of `customizations` that can be programmatically applied to the base recipe.
+
+*(Full, detailed schema definitions and a complete example recipe JSON are available in the `json_design_schemas` folder.)*
+
 ---
 
 ## 4. How to Run This Demo
