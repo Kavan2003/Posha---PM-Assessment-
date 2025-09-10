@@ -14,7 +14,7 @@ This document outlines the problem, proposed solution, and strategic thinking fo
 
 ---
 
-### 2. The Proposed User Flow
+## 2. The Proposed User Flow
 
 This diagram illustrates the simple, conversational user journey for this new capability. The goal is to make recipe customization feel as natural as a quick chat.
 
@@ -67,8 +67,16 @@ The architecture is composed of two core schemas: a `Recipe Schema` to define th
 ## 6. How to Run This Demo
 
 ---
+## 7. Measuring Success
 
-## 7. Limitations, Edge Cases & Roadmap
+To determine if this minimal viable capability is successful, I would track the following metrics:
+
+* **Adoption Rate:** % of user sessions that use the customization feature.
+* **Task Success Rate:** % of customization attempts that result in a `"status": "success"` from the intent parser.
+* **Qualitative Feedback:** Positive mentions of the feature in user feedback channels.
+
+---
+## 8. Limitations, Edge Cases & Roadmap
 
 This MVP is a focused first step. Acknowledging its limitations is key to defining a clear and realistic roadmap for a more robust V2.
 
