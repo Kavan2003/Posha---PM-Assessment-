@@ -1,10 +1,10 @@
-# Posha Recipe Customization MVP
+# Posha Recipe Customisation MVP
 
 This document outlines the problem, proposed solution, and strategic thinking for a minimal viable capability that allows a Posha user to customize recipes using natural language.
 
 ---
 
-## 1. The Problem & The User (User Empathy)
+## 1. The Problem & The User
 
 * **User Persona:** "The Busy Professional." They invested in a Posha robot to save time and eat healthier, but they still want the flexibility to adapt meals to their family's specific tastes, dietary needs, or what's currently in their fridge.
 
@@ -14,7 +14,21 @@ This document outlines the problem, proposed solution, and strategic thinking fo
 
 ---
 
-## 2. Alignment with Posha's Business Goals (Business Acumen)
+### 2. The Proposed User Flow
+
+This diagram illustrates the simple, conversational user journey for this new capability. The goal is to make recipe customization feel as natural as a quick chat.
+
+```mermaid
+graph TD
+    A[User opens Posha App] --> B{Selects a Recipe};
+    B --> C[Views Recipe Details];
+    C --> D["Enters natural language customization in chatbox<br/>'e.g., no chicken, add garlic'"];
+    D --> E{System Parses Intent};
+    E -- Success --> F["Displays updated recipe & confirmation<br/>'Okay, I've removed the chicken and added garlic.'"];
+    E -- Failure --> G["Displays clarification question<br/>'I'm not sure what you mean. Could you be more specific?'"];
+```
+
+## 3. Alignment with Posha's Business Goals
 
 This feature is not just a user convenience; it's a strategic investment in Posha's core business model.
 
@@ -24,7 +38,7 @@ This feature is not just a user convenience; it's a strategic investment in Posh
 
 ---
 
-## 3. MVP Scope & Prioritisation
+## 4. MVP Scope & Prioritisation
 
 The goal for this MVP was to deliver a simple, reliable, and valuable core experience. To achieve this, I ruthlessly prioritised the features that would solve the most common and high-value user problems first.
 
@@ -39,7 +53,7 @@ I chose to implement four core intents based on the most frequent and intuitive 
 
 ---
 
-## 4. The JSON Schema Design
+## 5. The JSON Schema Design
 
 The architecture is composed of two core schemas: a `Recipe Schema` to define the recipe itself, and a `Customization Schema` to define the LLM's output. The design is compositional and extensible.
 
@@ -50,11 +64,11 @@ The architecture is composed of two core schemas: a `Recipe Schema` to define th
 
 ---
 
-## 5. How to Run This Demo
+## 6. How to Run This Demo
 
 ---
 
-## 6. Limitations, Edge Cases & Roadmap
+## 7. Limitations, Edge Cases & Roadmap
 
 This MVP is a focused first step. Acknowledging its limitations is key to defining a clear and realistic roadmap for a more robust V2.
 
