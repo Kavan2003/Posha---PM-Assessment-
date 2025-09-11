@@ -21,7 +21,9 @@ This object provides a clear indication of success or failure for the entire req
 | Field | Type | Description |
 | :--- | :--- | :--- |
 | `state` | String | The overall outcome. **Required.** Options: `"success"`, `"failure"`. |
-| `reason` | String | `null` on success. On failure, it provides a machine-readable error code. **Required.** Options: `"ambiguous_request"`, `"unsupported_intent"`, `"invalid_ingredient"`. |
+| `reason` | String | `null` OR `"semi_ambiguous_request"`  on success. On failure, it provides a machine-readable error code. **Required.** Options: `"ambiguous_request"`, `"unsupported_intent"`, `"invalid_ingredient"` . |
+| `message` | String | The overall outcome message. **Required.** plain English text.  A user-friendly confirmation or clarification message. Think of it as the robot's friendly voice 🤖, telling the user what just happened (e.g., "Okay, I've removed the chicken and added more salt!").. |
+
 
 ---
 
@@ -34,8 +36,8 @@ Each object in the `customisations` array represents one specific change request
 | `intent` | String | **[CRITICAL]** The core action the user wants to perform. **Required.** Options: `"remove_ingredient"`, `"add_ingredient"`, `"substitute_ingredient"`, `"adjust_quantity"`. |
 | `target_ingredient`| String | The name of the existing ingredient to be acted upon. **Required** for all intents except `add_ingredient`. |
 | `new_ingredient` | Object | An object describing the ingredient to be added or used as a substitute. **Required** for `add_ingredient` and `substitute_ingredient`. See New Ingredient Object below. |
-| `modifier` | String | The desired change in quantity. **Required** for `adjust_quantity`. Options: `"less"`, `"more"`, `"half"`, `"double"`. |
-
+| `quantity` | Number | The desired change in quantity. **Required** for `adjust_quantity` and `add_ingredient`.The numeric value for the amount. |
+| `unit` | String | The desired change in quantity. **Required** for `adjust_quantity` and `add_ingredient` .The unit of measurement (e.g. "g", "ml"). |
 ---
 
 ##### **New Ingredient Object**
@@ -46,7 +48,7 @@ This object defines the properties of an ingredient being added or substituted i
 | :--- | :--- | :--- |
 | `name` | String | The name of the new ingredient (e.g., "Olive Oil"). |
 | `quantity` | Number | The numeric value for the amount. |
-| `unit` | String | The unit of measurement (e.g., "tbsp", "cloves"). |
+| `unit` | String | The unit of measurement (e.g.,  "g", "ml"). |
 
 ##### Example 1: A Successful Multi-Step Request
 This shows how the system handles multiple, valid requests in a single sentence.
@@ -60,7 +62,9 @@ LLM JSON Output:
 {
   "status": {
     "state": "success",
-    "reason": null
+    "reason": null,
+      "message": "Okay, I've removed the chicken, swapped the butter for olive oil, and added a bit more salt for you!"
+
   },
   "customisations": [
     {
@@ -72,14 +76,15 @@ LLM JSON Output:
       "target_ingredient": "Unsalted Butter",
       "new_ingredient": {
         "name": "Olive Oil",
-        "quantity": 3,
-        "unit": "tbsp"
+        "quantity": 30,
+        "unit": "ml"
       }
     },
     {
       "intent": "adjust_quantity",
       "target_ingredient": "Salt",
-      "modifier": "more"
+       "quantity": 10,
+        "unit": "g"
     }
   ],
   "original_request": "no chicken, use olive oil instead of butter, and add more salt"
@@ -97,16 +102,17 @@ LLM JSON Output:
 {
   "status": {
     "state": "success",
-    "reason": null
+    "reason": null,
+      "message": "Done! I've calculated and added 2 cloves (50 g) of garlic to the recipe."
+
   },
   "customizations": [
     {
       "intent": "add_ingredient",
       "new_ingredient": {
         "name": "Garlic",
-        "quantity": 2,
-        "unit": "cloves",
-        "notes": "Minced"
+        "quantity": 50,
+        "unit": "g",
       }
     }
   ],
@@ -125,9 +131,51 @@ LLM JSON Output:
 {
   "status": {
     "state": "failure",
-    "reason": "ambiguous_request"
+    "reason": "ambiguous_request",
+      "message": "I'm not quite sure what you mean by 'taste better.' Could you be more specific, like 'add more herbs' or 'make it spicier'?"
+
   },
   "customisations": [],
   "original_request": "make it taste better"
+}
+
+##### Example 4: A Multi semi success Request Due to Ambiguity
+This shows how the system intelligently parses a chaotic user request, executing the valid intents while acknowledging and reporting the parts it could not understand.
+
+User Input: "Make is So much Spiecy and add 1000 g of salt and remove chicken and add paneer and keep paneer more and make it taste like my mom"
+
+LLM JSON Output:
+
+```json
+{
+  "status": {
+    "state": "success",
+    "reason": "semi_ambiguous_request",
+    "message": "Okay, I've made it much spicier, adjusted the salt to 1000g, and swapped the chicken for a generous portion of paneer. I wasn't able to understand the part about 'making it taste like my mom'."
+  },
+  "customizations": [
+    {
+      "intent": "adjust_quantity",
+      "target_ingredient": "Black Pepper",
+      "quantity": 10,
+      "unit": "g"
+    },
+    {
+      "intent": "adjust_quantity",
+      "target_ingredient": "Salt",
+      "quantity": 1000,
+      "unit": "g"
+    },
+    {
+      "intent": "substitute_ingredient",
+      "target_ingredient": "Boneless Chicken Thighs",
+      "new_ingredient": {
+        "name": "Paneer",
+        "quantity": 250,
+        "unit": "g"
+      }
+    }
+  ],
+  "original_request": "Make is So much Spiecy and add 1000 g of salt and remove chicken and add paneer and keep paneer more and make it taste like my mom"
 }
 ```

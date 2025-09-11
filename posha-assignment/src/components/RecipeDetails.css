@@ -1,3 +1,145 @@
+.stunning-card-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.stunning-card-flex .step-icon-circle {
+  margin-right: 0;
+  margin-top: 0.2rem;
+}
+.stunning-card-flex .step-card-body {
+  padding-left: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.stunning-card-flex .step-title-group {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+.stunning-card-flex .step-number {
+  font-size: 1.05rem;
+  color: #ff9800;
+  font-weight: 700;
+}
+.stunning-card-flex .action-label {
+  font-size: 1.05rem;
+  color: #333;
+  font-weight: 500;
+}
+/* Stunning Instruction Card Styles */
+.stunning-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1.5px 6px rgba(0,0,0,0.04);
+  margin-bottom: 2rem;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s;
+  border: 1px solid #f0f0f0;
+}
+.stunning-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  border-color: #e0e0e0;
+}
+.step-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.step-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffb347 0%, #ffcc80 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.2rem;
+  box-shadow: 0 2px 8px rgba(255,179,71,0.15);
+}
+.step-icon {
+  font-size: 2rem;
+  color: #fff;
+}
+.step-title-group {
+  display: flex;
+  flex-direction: column;
+}
+.step-number {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ff9800;
+  letter-spacing: 0.5px;
+}
+.action-label {
+  font-size: 1.05rem;
+  color: #333;
+  font-weight: 500;
+  margin-top: 2px;
+}
+.step-card-body {
+  padding-left: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.step-description {
+  font-size: 1.08rem;
+  color: #222;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+.step-parameters {
+  margin-top: 0.2rem;
+}
+.step-params-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.step-param-item {
+  background: #f7f7fa;
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.98rem;
+  color: #444;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.param-qty {
+  font-weight: 600;
+  color: #ff9800;
+}
+.param-name {
+  font-weight: 500;
+  color: #333;
+}
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .stunning-card {
+    padding: 1rem;
+  }
+  .step-card-body {
+    padding-left: 0;
+  }
+  .step-icon-circle {
+    width: 38px;
+    height: 38px;
+    margin-right: 0.7rem;
+  }
+}
 .recipe-details {
   background: #fff;
   border-radius: 16px;
@@ -174,37 +316,84 @@
   margin: 0;
 }
 
-.instruction-item {
+
+/* Enhanced Instructions Card Style */
+.instructions-list.enhanced {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 1.5rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid #f0f0f0;
 }
 
-.instruction-item:last-child {
-  border-bottom: none;
+.instruction-card {
+  background: #f8fffe;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,179,122,0.07);
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  border: 1px solid #e0f7ef;
+  transition: box-shadow 0.2s;
 }
-
+.instruction-card:hover {
+  box-shadow: 0 4px 24px rgba(0,179,122,0.13);
+  border-color: var(--color-primary);
+}
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 .step-number {
   background: var(--color-primary);
   color: white;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  font-size: 0.9rem;
-  flex-shrink: 0;
-  margin-top: 2px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(0,179,122,0.08);
 }
-
-.step-description {
+.step-action {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.action-label {
   font-size: 1rem;
-  line-height: 1.6;
+  font-weight: 500;
+  color: #009e6e;
+}
+.step-content {
+  margin-left: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.step-description {
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: #333;
+  font-weight: 500;
+}
+.step-parameters {
+  font-size: 0.95rem;
+  color: #666;
+  background: #e6f9f3;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  margin-top: 0.2rem;
+  font-style: italic;
+  width: fit-content;
 }
 
 @media (max-width: 768px) {

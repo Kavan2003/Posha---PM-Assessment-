@@ -41,7 +41,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
 | Field | Type | Description |
 | :--- | :--- | :--- |
 | `step_number` | Number | The sequential order of the step (1, 2, 3...). |
-| `description` | String | A human-readable summary of the step (e.g., "Sauté the mushrooms and butter"). |
 | `action` | String | **[CRITICAL]** The command for the robot. Options: `"dispense"`, `"cook"`, `"stir"`, `"rest"`. |
 | `parameters` | Object | A flexible object whose content depends on the `action`. See Parameter Objects below. |
 
@@ -86,12 +85,12 @@ This is the core of the schema. Every step has an `action` and `parameters`.
   },
   "ingredients": [
     { "name": "Penne Pasta", "quantity": 280, "unit": "g" },
-    { "name": "Button Mushroom", "quantity": 200, "unit": "g", "notes": "Sliced" },
-    { "name": "Boneless Chicken Thighs", "quantity": 500, "unit": "g", "notes": "Cut into bite-sized pieces" },
+    { "name": "Button Mushroom", "quantity": 200, "unit": "g"},
+    { "name": "Boneless Chicken Thighs", "quantity": 500, "unit": "g"},
     { "name": "Unsalted Butter", "quantity": 3, "unit": "tbsp" },
     { "name": "White Wine", "quantity": 60, "unit": "g" },
     { "name": "Dairy Cream Cheese", "quantity": 35, "unit": "g" },
-    { "name": "Parmesan Cheese", "quantity": 30, "unit": "g", "notes": "Grated" },
+    { "name": "Parmesan Cheese", "quantity": 30, "unit": "g" },
     { "name": "Oil", "quantity": 25, "unit": "ml" },
     { "name": "Water", "quantity": 1100, "unit": "ml" },
     { "name": "Salt", "quantity": 6, "unit": "g" },
@@ -102,7 +101,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 1,
       "action": "dispense",
-      "description": "Dispense oil",
       "parameters": {
         "items": [{ "name": "Oil", "quantity": 25, "unit": "ml" }]
       }
@@ -110,7 +108,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 2,
       "action": "dispense",
-      "description": "Dispense mushrooms and butter",
       "parameters": {
         "items": [
           { "name": "Button Mushroom", "quantity": 200, "unit": "g" },
@@ -121,7 +118,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 3,
       "action": "dispense",
-      "description": "Dispense chicken",
       "parameters": {
         "items": [{ "name": "Boneless Chicken Thighs", "quantity": 500, "unit": "g" }]
       }
@@ -129,7 +125,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 4,
       "action": "dispense",
-      "description": "Dispense first half of salt",
       "parameters": {
         "items": [{ "name": "Salt", "quantity": 3, "unit": "g" }]
       }
@@ -137,7 +132,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 5,
       "action": "dispense",
-      "description": "Dispense black pepper",
       "parameters": {
         "items": [{ "name": "Black Pepper", "quantity": 3, "unit": "g" }]
       }
@@ -145,7 +139,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 6,
       "action": "dispense",
-      "description": "Dispense second half of salt",
       "parameters": {
         "items": [{ "name": "Salt", "quantity": 3, "unit": "g" }]
       }
@@ -153,7 +146,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 7,
       "action": "dispense",
-      "description": "Dispense pasta",
       "parameters": {
         "items": [{ "name": "Penne Pasta", "quantity": 280, "unit": "g" }]
       }
@@ -161,7 +153,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 8,
       "action": "dispense",
-      "description": "Dispense water",
       "parameters": {
         "items": [{ "name": "Water", "quantity": 1100, "unit": "ml" }]
       }
@@ -169,7 +160,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 9,
       "action": "cook",
-      "description": "Briefly sauté at high power",
       "parameters": {
         "mode": "pan_cook",
         "power_watts": 1600,
@@ -179,7 +169,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 10,
       "action": "cook",
-      "description": "Cook pasta until al dente",
       "parameters": {
         "mode": "boil",
         "power_watts": 1400,
@@ -189,7 +178,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 11,
       "action": "dispense",
-      "description": "Dispense wine and cheeses",
       "parameters": {
         "items": [
           { "name": "White Wine", "quantity": 60, "unit": "g" },
@@ -201,7 +189,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 12,
       "action": "dispense",
-      "description": "Dispense herb mix",
       "parameters": {
         "items": [{ "name": "Dried Herb Mix", "quantity": 15, "unit": "g" }]
       }
@@ -209,7 +196,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
     {
       "step_number": 13,
       "action": "cook",
-      "description": "Simmer to finish the sauce",
       "parameters": {
         "mode": "simmer",
         "power_watts": 1000,

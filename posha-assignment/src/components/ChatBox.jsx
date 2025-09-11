@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { fetchGeminiCustomization } from '../controllers/geminiController';
 import './ChatBox.css';
 
 const quickSuggestions = [
@@ -6,8 +7,6 @@ const quickSuggestions = [
   { text: 'Add garlic', icon: '🧄' },
   { text: 'Less salt', icon: '🧂' },
   { text: 'More cheese', icon: '🧀' },
-  { text: 'Make it vegan', icon: '🌱' },
-  { text: 'Gluten-free', icon: '🌾' }
 ];
 
 const ChatBox = () => {
@@ -17,78 +16,30 @@ const ChatBox = () => {
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(false);
 
+  // Accept a callback prop for customization
+  const onCustomization = typeof window.onCustomization === 'function' ? window.onCustomization : null;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) {
       setError('Please enter a customization request.');
       return;
     }
-    
     setLoading(true);
     setError(null);
     setOutput(null);
     setCopied(false);
-    
-    // Simulate API call
-    setTimeout(() => {
-      let json = {};
-      const inputLower = input.toLowerCase();
-      
-      if (inputLower.includes('chicken') || inputLower.includes('remove')) {
-        json = {
-          status: { state: 'success', reason: null },
-          customisations: [
-            { intent: 'remove_ingredient', target_ingredient: 'Boneless Chicken Thighs' }
-          ],
-          original_request: input
-        };
-      } else if (inputLower.includes('garlic')) {
-        json = {
-          status: { state: 'success', reason: null },
-          customisations: [
-            { intent: 'add_ingredient', new_ingredient: { name: 'Garlic', quantity: 3, unit: 'cloves' } }
-          ],
-          original_request: input
-        };
-      } else if (inputLower.includes('vegan')) {
-        json = {
-          status: { state: 'success', reason: null },
-          customisations: [
-            { intent: 'remove_ingredient', target_ingredient: 'Boneless Chicken Thighs' },
-            { intent: 'remove_ingredient', target_ingredient: 'Dairy Cream Cheese' },
-            { intent: 'remove_ingredient', target_ingredient: 'Parmesan Cheese' },
-            { intent: 'add_ingredient', new_ingredient: { name: 'Cashew Cream', quantity: 100, unit: 'ml' } }
-          ],
-          original_request: input
-        };
-      } else if (inputLower.includes('salt') || inputLower.includes('less')) {
-        json = {
-          status: { state: 'success', reason: null },
-          customisations: [
-            { intent: 'modify_ingredient', target_ingredient: 'Salt', new_quantity: 3, unit: 'g' }
-          ],
-          original_request: input
-        };
-      } else if (inputLower.includes('cheese') || inputLower.includes('more')) {
-        json = {
-          status: { state: 'success', reason: null },
-          customisations: [
-            { intent: 'modify_ingredient', target_ingredient: 'Parmesan Cheese', new_quantity: 50, unit: 'g' }
-          ],
-          original_request: input
-        };
-      } else {
-        json = {
-          status: { state: 'failure', reason: 'ambiguous_request' },
-          customisations: [],
-          original_request: input,
-          suggestion: 'Try being more specific, like "remove chicken" or "add garlic"'
-        };
+    try {
+      const response = await fetchGeminiCustomization(input);
+  console.log('Gemini full response:', response);
+      setOutput(response);
+      if (onCustomization && response && response.status && response.customisations) {
+        onCustomization(response);
       }
-      
-      setOutput(json);
-      setLoading(false);
-    }, 1200);
+    } catch (err) {
+      setError('Failed to fetch from Gemini API.');
+    }
+    setLoading(false);
   };
 
   const handleSuggestion = (suggestion) => {
@@ -110,9 +61,6 @@ const ChatBox = () => {
         <h3>🍳 Customize Recipe</h3>
         <p>Tell us how you'd like to modify this recipe</p>
       </div>
-      
-      
-      
       <form onSubmit={handleSubmit} className="chat-form">
         <div className="input-container">
           <input
@@ -132,55 +80,27 @@ const ChatBox = () => {
           </button>
         </div>
       </form>
-      
       {error && (
         <div className="error-message">
           <span className="error-icon">⚠️</span>
           {error}
         </div>
       )}
-      
-      {output && (
-        <div className="chat-output">
-          <div className="output-header">
-            <h4>
-              {output.status.state === 'success' ? '✅ Recipe Customization' : '❌ Unable to Process'}
-            </h4>
-            <button onClick={handleCopy} className="copy-btn">
-              {copied ? '✓ Copied!' : '📋 Copy JSON'}
-            </button>
-          </div>
-          
-          {output.status.state === 'success' ? (
-            <div className="customizations-preview">
-              <h5>Changes to be made:</h5>
-              <ul className="changes-list">
-                {output.customisations.map((change, index) => (
-                  <li key={index} className={`change-item ${change.intent}`}>
-                    {change.intent === 'remove_ingredient' && (
-                      <span>🗑️ Remove <strong>{change.target_ingredient}</strong></span>
-                    )}
-                    {change.intent === 'add_ingredient' && (
-                      <span>➕ Add <strong>{change.new_ingredient.quantity} {change.new_ingredient.unit} {change.new_ingredient.name}</strong></span>
-                    )}
-                    {change.intent === 'modify_ingredient' && (
-                      <span>✏️ Change <strong>{change.target_ingredient}</strong> to <strong>{change.new_quantity} {change.unit}</strong></span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <div className="error-details">
-              <p>Reason: {output.status.reason}</p>
-              {output.suggestion && <p className="suggestion">💡 {output.suggestion}</p>}
-            </div>
-          )}
-          
-          <details className="raw-json">
-            <summary>View Raw JSON</summary>
-            <pre>{JSON.stringify(output, null, 2)}</pre>
-          </details>
+      {output && output.status && (
+        <div
+          className="gemini-message"
+          style={{
+            color: output.status.state === 'success' ? 'green' : 'red',
+            fontWeight: 600,
+            fontSize: '1.1rem',
+            marginTop: '1rem',
+            border: `1.5px solid ${output.status.state === 'success' ? 'green' : 'red'}`,
+            borderRadius: '8px',
+            padding: '0.7rem',
+            background: output.status.state === 'success' ? '#eaffea' : '#ffeaea',
+          }}
+        >
+          {output.status.message}
         </div>
       )}
     </div>
