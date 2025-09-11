@@ -106,3 +106,7 @@ This MVP is a focused first step. Acknowledging its limitations is key to defini
 * **Quantity and Modifier Inference:**
     * **Limitation:** For ambiguous requests like 'add salt' or 'less pasta', the LLM makes a 'best-effort' guess at a reasonable quantity or modifier.
     * **Roadmap (V2):** A more sophisticated system would be needed to handle precise user preferences, potentially learning from past user choices.
+* **No Process Modifications (e.g., Adjusting Cook Time):**
+    * **Limitation:** The MVP only handles modifications to the `ingredients` list. It does not support requests to change the cooking process itself, such as "cook it for 5 more minutes."
+    * **Reasoning:** Modifying the cooking process introduces significant downstream complexity (e.g., which `cook` step to alter, how it affects subsequent steps). To maintain a razor-sharp focus on the core capability of intent parsing, all process modifications were scoped out.
+    * **Roadmap (V2):** A future version would introduce a new set of intents specifically for process modification, along with the necessary "Recipe Engine" logic to handle them.
