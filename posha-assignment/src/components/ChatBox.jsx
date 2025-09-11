@@ -14,6 +14,7 @@ const ChatBox = () => {
   const [output, setOutput] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [copied, setCopied] = useState(false);
 
   // Accept a callback prop for customization
@@ -31,13 +32,19 @@ const ChatBox = () => {
     setCopied(false);
     try {
       const response = await fetchGeminiCustomization(input);
-  console.log('Gemini full response:', response);
-      setOutput(response);
-      if (onCustomization && response && response.status && response.customisations) {
-        onCustomization(response);
+      console.log('Gemini full response:', response);
+      if (response && response.error) {
+        setError(response.error);
+        setShowModal(true);
+      } else {
+        setOutput(response);
+        if (onCustomization && response && response.status && response.customisations) {
+          onCustomization(response);
+        }
       }
     } catch (err) {
       setError('Failed to fetch from Gemini API.');
+      setShowModal(true);
     }
     setLoading(false);
   };
@@ -80,12 +87,17 @@ const ChatBox = () => {
           </button>
         </div>
       </form>
-      {error && (
-        <div className="error-message">
-          <span className="error-icon">⚠️</span>
-          {error}
+
+      {/* Error Modal Popup */}
+      {showModal && error && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button className="modal-close" onClick={() => setShowModal(false)}>&times;</button>
+            <div className="modal-message">{error}</div>
+          </div>
         </div>
       )}
+
       {output && output.status && (
         <div
           className="gemini-message"

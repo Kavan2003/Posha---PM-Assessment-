@@ -17,7 +17,7 @@ export function getIngredientsJSONString() {
 
 export async function fetchGeminiCustomization(userInput) {
   // Replace with your actual Gemini API key
-  const API_KEY = 'AIzaSyCxhpB-YAh60rsSIekSm841SPRZOIQuMW8';
+  const API_KEY = import.meta.env.VITE_API_KEY;
   const MODEL_ID = 'gemini-2.5-flash-lite';
   const GENERATE_CONTENT_API = 'streamGenerateContent';
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_ID}:${GENERATE_CONTENT_API}?key=${API_KEY}`;
