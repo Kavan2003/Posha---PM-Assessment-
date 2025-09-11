@@ -64,8 +64,42 @@ The architecture is composed of two core schemas: a `Recipe Schema` to define th
 
 ---
 
-## 6. How to Run This Demo
+### 6. How to Run This Demo
 
+I have built both a live, interactive web demo for a quick review and provided instructions for running the project locally for a deeper dive.
+
+#### Option 1: Live Interactive Demo (Recommended)
+
+For the most convenient and interactive experience, the demo is deployed and accessible at the following link:
+
+**Live Link:** **[https://posha-pm-assessment.vercel.app/](https://posha-pm-assessment.vercel.app/)**
+
+#### Option 2: Running the Project Locally
+
+To run the project on your local machine, please follow these steps:
+
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/Kavan2003/posha-pm-assessment
+    cd posha-assignment
+    ```
+
+2.  **Create an Environment File:**
+    Create a `.env` file in the root of the `posha-assignment` directory and add your Gemini API key:
+    ```
+    VITE_API_KEY="your_gemini_api_key_here"
+    ```
+
+3.  **Install Dependencies:**
+    ```bash
+    npm install
+    ```
+
+4.  **Run the Development Server:**
+    ```bash
+    npm run dev
+    ```
+    The application will now be running on `http://localhost:5173` (or the next available port).
 ---
 ## 7. Measuring Success
 
@@ -90,7 +124,7 @@ This MVP is a focused first step. Acknowledging its limitations is key to defini
     * **Roadmap (V2):** A future version would build a dedicated `dietary_preference` intent that can intelligently orchestrate these multiple steps.
 
 * **No Culinary Validation:**
-    * **Limitation:** The system currently trusts the user completely and does not perform a "recipe sanity check." A user can request to "remove all ingredients," and the system will generate that intent.
+    * **Limitation:** The system currently trusts the user completely and does not perform a "recipe sanity check." A user can remove all ingredients, and the system will generate that intent.
     * **Reasoning:** The MVP's core job is to prove we can reliably translate natural language into a structured format. Culinary validation is a separate, complex problem requiring a sophisticated rules engine, which is out of scope for an initial build.
     * **Roadmap (V2):** Build a "Recipe Sanity Check" module to warn users about requests that might result in a broken or unpalatable dish.
 
@@ -110,3 +144,37 @@ This MVP is a focused first step. Acknowledging its limitations is key to defini
     * **Limitation:** The MVP only handles modifications to the `ingredients` list. It does not support requests to change the cooking process itself, such as "cook it for 5 more minutes."
     * **Reasoning:** Modifying the cooking process introduces significant downstream complexity (e.g., which `cook` step to alter, how it affects subsequent steps). To maintain a razor-sharp focus on the core capability of intent parsing, all process modifications were scoped out.
     * **Roadmap (V2):** A future version would introduce a new set of intents specifically for process modification, along with the necessary "Recipe Engine" logic to handle them.
+* **Static Cooking Steps:**
+    * **Limitation:** The MVP only modifies the `ingredients` list. It does not dynamically add or remove corresponding `steps`. For example, if a user removes "chicken," the "Dispense chicken" step will still exist in the output recipe, even though the chicken is no longer in the ingredient list.
+    * **Reasoning:** The primary goal was to prove reliable intent parsing. Dynamically modifying the cooking steps is a separate "Recipe Engine" problem. To maintain a razor-sharp focus, this was intentionally scoped out.
+    * **Roadmap (V2):** The "Recipe Engine" would be responsible for intelligently modifying the `steps` array—removing steps for removed ingredients and inserting new steps at the logically correct point for added ones.
+
+### 9. A 2-Week Roadmap: Addressing All Limitations
+
+This MVP is the essential first step. If I had two more weeks, my focus would be on a strategic sprint to systematically eliminate the MVP's core limitations and expand its capabilities to solve the user's end-to-end problem.
+
+
+
+#### **Week 1: Building the "Intelligent Recipe Engine" & User Trust**
+
+The primary goal of the first week is to build the core backend logic that makes true, intelligent customization possible.
+
+* **Initiative 1: Build the Core Recipe Engine.**
+    * **Limitation Addressed:** `Static Cooking Steps`, `No Culinary Validation`.
+    * **Solution:** I would build a "Recipe Engine" module responsible for programmatically modifying the recipe's `steps` array. This engine would intelligently remove steps for discarded ingredients (e.g., removing the "Dispense chicken" step) and insert new steps at the logically correct point. It would also contain the initial "sanity check" logic to warn users about nonsensical requests (e.g., "remove all ingredients").
+
+* **Initiative 2: Implement a "Confidence Score" & Clarification Module.**
+    * **Limitation Addressed:** `Ambiguity & Subjectivity`.
+    * **Solution:** I would enhance the LLM-powered service to include a "confidence score" with each parsed intent. If the score is low, the system would not execute the change but would trigger a clarification dialogue, asking the user a targeted question (e.g., *"By 'healthier,' do you mean fewer calories or less salt?"*). This builds immense user trust and prevents errors.
+
+#### **Week 2: Expanding Capabilities & Solving the User's "Real" Problem**
+
+The second week focuses on leveraging the new Recipe Engine to launch advanced features and connect the software to Posha's biggest strategic challenge.
+
+* **Initiative 1: Launch Advanced Intent Handling.**
+    * **Limitation Addressed:** `Complex Intent Handling`, `No Process Modifications`.
+    * **Solution:** With the Recipe Engine in place, I would build handlers for complex, multi-step intents. A `dietary_preference` intent for "make it vegetarian" would now be able to correctly remove, substitute, and check ingredients. I would also introduce new intents for process modification (e.g., `adjust_cook_time`), which the engine would apply to the correct `cook` step in the recipe.
+
+* **Initiative 2 (The Strategic Move): Prototype a Solution for the "Prep Problem."**
+    * **Limitation Addressed:** This goes beyond the assignment to solve Posha's biggest user pain point.
+    * **Solution:** I would **prototype an integration with a grocery API (like Instacart's).** When a user adds an ingredient they don't have, a new button would appear in the app: **"Add garlic to your Instacart basket?"** This is a lean, powerful experiment to test a transformative new value proposition. It connects this software feature directly to solving Posha's most significant strategic challenge, turning a simple customization tool into a true end-to-end meal planning solution.

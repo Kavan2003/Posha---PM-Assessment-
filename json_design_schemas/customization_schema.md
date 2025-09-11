@@ -36,8 +36,9 @@ Each object in the `customisations` array represents one specific change request
 | `intent` | String | **[CRITICAL]** The core action the user wants to perform. **Required.** Options: `"remove_ingredient"`, `"add_ingredient"`, `"substitute_ingredient"`, `"adjust_quantity"`. |
 | `target_ingredient`| String | The name of the existing ingredient to be acted upon. **Required** for all intents except `add_ingredient`. |
 | `new_ingredient` | Object | An object describing the ingredient to be added or used as a substitute. **Required** for `add_ingredient` and `substitute_ingredient`. See New Ingredient Object below. |
-| `quantity` | Number | The desired change in quantity. **Required** for `adjust_quantity` and `add_ingredient`.The numeric value for the amount. |
-| `unit` | String | The desired change in quantity. **Required** for `adjust_quantity` and `add_ingredient` .The unit of measurement (e.g. "g", "ml"). |
+| `mode` | String | The desired mode. **Required** for `adjust_quantity` and `add_ingredient` .The string must be `Add` OR `Sub` OR `Set`. |
+| `quantity` | Number | The desired change in quantity. **Required** for `adjust_quantity` and `add_ingredient` .The numeric value for the amount. |
+| `unit` | String | The desired change in quantity. **Required** for `adjust_quantity` and `add_ingredient` .The unit of measurement "g", "ml" only. |
 ---
 
 ##### **New Ingredient Object**
@@ -83,6 +84,7 @@ LLM JSON Output:
     {
       "intent": "adjust_quantity",
       "target_ingredient": "Salt",
+      "mode": "Add",
        "quantity": 10,
         "unit": "g"
     }
@@ -138,6 +140,7 @@ LLM JSON Output:
   "customisations": [],
   "original_request": "make it taste better"
 }
+```
 
 ##### Example 4: A Multi semi success Request Due to Ambiguity
 This shows how the system intelligently parses a chaotic user request, executing the valid intents while acknowledging and reporting the parts it could not understand.
@@ -157,12 +160,14 @@ LLM JSON Output:
     {
       "intent": "adjust_quantity",
       "target_ingredient": "Black Pepper",
+        "mode": "Add",
       "quantity": 10,
       "unit": "g"
     },
     {
       "intent": "adjust_quantity",
       "target_ingredient": "Salt",
+        "mode": "Set",
       "quantity": 1000,
       "unit": "g"
     },
@@ -177,5 +182,48 @@ LLM JSON Output:
     }
   ],
   "original_request": "Make is So much Spiecy and add 1000 g of salt and remove chicken and add paneer and keep paneer more and make it taste like my mom"
+}
+```
+##### Example 5: A  Ambiguity in current ingredient and given input
+This shows system is predictable.
+User Input: "Change 5tbsp salt"
+
+LLM JSON Output:
+
+```json
+{
+  "status": {
+    "state": "success",
+    "reason": null,
+    "message": "Okay, I've adjusted the salt quantity for you."
+  },
+  "customisations": [
+    {
+      "intent": "adjust_quantity",
+      "target_ingredient": "Salt",
+      "mode": "Set",
+      "quantity": 75,
+      "unit": "g"
+    }
+  ],
+  "original_request": "Change 5tbsp salt"
+}
+```
+##### Example 6: A  complete mismatch of quantity
+This shows system is predictable.
+User Input: "Change 5ml salt"
+
+LLM JSON Output:
+
+```json
+{
+  "status": {
+    "state": "failure",
+    "reason": "ambiguous_request",
+      "message": "I'm not quite sure what you mean by '5ml salt? Salt is suppose to be in tbsp or g"
+
+  },
+  "customisations": [],
+  "original_request": "Change 5ml salt"
 }
 ```
