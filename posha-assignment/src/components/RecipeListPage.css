@@ -1,0 +1,10 @@
+.recipe-list-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.recipe-list-page h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}

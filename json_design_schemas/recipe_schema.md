@@ -22,10 +22,6 @@ This schema is designed to be a flexible and extensible "source of truth" for an
 | Field | Type | Description |
 | :--- | :--- | :--- |
 | `cuisine_type` | String | e.g., "Italian-American", "North Indian". |
-| `servings` | Number | The number of people the recipe serves. |
-| `prep_time` | Number | Estimated manual preparation time for the user **always in seconds**. |
-| `source_url` | String | (Optional) URL to the original recipe if adapted. |
-
 ---
 
 ##### **Ingredient Object**
@@ -87,8 +83,6 @@ This is the core of the schema. Every step has an `action` and `parameters`.
   "description": "A rich and savoury one-pot pasta dish, perfect for a weeknight dinner.",
   "metadata": {
     "cuisine_type": "Italian-American",
-    "servings": 2,
-    "prep_time_minutes": 15
   },
   "ingredients": [
     { "name": "Penne Pasta", "quantity": 280, "unit": "g" },

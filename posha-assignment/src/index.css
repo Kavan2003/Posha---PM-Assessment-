@@ -1,0 +1,236 @@
+/* Cleared for custom styles. */
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-Regular-BF67243fd29a433.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-Bold-BF67243fd2cfa56.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-BoldItalic-BF67243fd27cb34.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-Heavy-BF67243fd243d39.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-HeavyItalic-BF67243fd2d8a65.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-Light-BF67243fd27eae5.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-LightItalic-BF67243fd278f8a.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-Medium-BF67243fd28915a.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-MediumItalic-BF67243fd29aa74.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-RegularItalic-BF67243fd308a20.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-SemiBold-BF67243fd2c0028.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertMono';
+  src: url('./assets/fonts/RoobertMonoTRIAL-SemiBoldItalic-BF67243fd29fef0.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-Regular-BF67243fd53ad6a.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-RegularItalic-BF67243fd53afce.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-Bold-BF67243fd539cff.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-BoldItalic-BF67243fd53f821.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-Heavy-BF67243fd53d89c.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-HeavyItalic-BF67243fd540151.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-Light-BF67243fd53fc7c.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-LightItalic-BF67243fd53a243.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-Medium-BF67243fd524e58.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-MediumItalic-BF67243fd527dda.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-SemiBold-BF67243fd539b9e.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'RoobertSemiMono';
+  src: url('./assets/fonts/RoobertSemiMonoTRIAL-SemiBoldItalic-BF67243fd53e269.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-Regular-BF67243fd53fdf2.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-RegularItalic-BF67243fd5414aa.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-Bold-BF67243fd540abb.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-BoldItalic-BF67243fd540e4b.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-Heavy-BF67243fd53e164.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-HeavyItalic-BF67243fd53f821.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-Light-BF67243fd502239.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-LightItalic-BF67243fd51b2c9.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-Medium-BF67243fd53e059.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-MediumItalic-BF67243fd54022e.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-SemiBold-BF67243fd54213d.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roobert';
+  src: url('./assets/fonts/RoobertTRIAL-SemiBoldItalic-BF67243fd5409dc.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+:root {
+  --theme-font: 'Roobert', 'RoobertMono', 'RoobertSemiMono', monospace;
+  --color-bg: #F4F4F4;
+  --color-text: #1E1E1E;
+  --color-primary: #00B37A;
+  --color-secondary: #FF6B00;
+}
+
+body, * {
+  font-family: var(--theme-font);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
