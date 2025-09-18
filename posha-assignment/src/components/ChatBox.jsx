@@ -22,6 +22,14 @@ const ChatBox = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    posthog.capture('update recipe button', {
+      // These are custom properties to give you more context
+      button_name: '🍳 Update Recipe',
+      location: 'Creamy Pasta with Chicken and Mushrooms Section',
+      user_input: input, // The dynamic value from the input field
+
+    
+    });
     if (!input.trim()) {
       setError('Please enter a customization request.');
       return;
