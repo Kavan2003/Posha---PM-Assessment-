@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { fetchGeminiCustomization } from '../controllers/geminiController';
 import './ChatBox.css';
+import { usePostHog } from 'posthog-js/react'; // 1. IMPORT THIS HOOK
+
 
 const quickSuggestions = [
   { text: 'Remove chicken', icon: '🚫' },
@@ -10,6 +12,7 @@ const quickSuggestions = [
 ];
 
 const ChatBox = () => {
+    const pg = usePostHog(); // 2. CALL THE HOOK HERE
   const [input, setInput] = useState('');
   const [output, setOutput] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -22,7 +25,7 @@ const ChatBox = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    posthog.capture('update recipe button', {
+    pg.capture('update recipe button', {
       // These are custom properties to give you more context
       button_name: '🍳 Update Recipe',
       location: 'Creamy Pasta with Chicken and Mushrooms Section',
